@@ -1,18 +1,12 @@
-﻿using MgpTechTickets.Domain.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MgpTechTickets.Models
+namespace MgpTechTickets.Application.dto.DtoReponse
 {
-    public class Procedimentos : BaseModel
+    public class ProcedimentosDtoResponse : BaseDtoModel
     {
-        public Procedimentos()
-        {
-
-        }
-        public Ambiente AmbienteId { get; set; }
         public string DescricaoValue { get; set; }
         public string Descricao { get; set; }
         public string Status_ { get; set; }

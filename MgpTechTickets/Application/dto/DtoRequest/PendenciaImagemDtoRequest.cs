@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MgpTechTickets.Domain.Models
+namespace MgpTechTickets.Application.dto.DtoRequest
 {
-    public  abstract class BaseModel
+    public class PendenciaImagemDtoRequest
     {
-        public int Id { get; set; }
     }
 }

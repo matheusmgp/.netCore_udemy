@@ -1,20 +1,13 @@
-﻿using MgpTechTickets.Domain.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MgpTechTickets.Models
+namespace MgpTechTickets.Application.dto.DtoReponse
 {
-    public class FilialDados : BaseModel
+    public class FilialDadosDtoResponse : BaseDtoModel
     {
-        public FilialDados()
-        {
-
-        }
-
-       
-        public Filial FilialId { get; set; }
+        public int FilialId { get; set; }
         public string NomeRepre { get; set; }
         public string NomeFinan { get; set; }
         public string CpfRepre { get; set; }

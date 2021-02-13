@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\dto\" />
+    <Folder Include="Application\dto\DtoRequest\" />
+    <Folder Include="Application\dto\DtoReponse\" />
     <Folder Include="Application\service\" />
     <Folder Include="Domain\interfaces.repositories\" />
     <Folder Include="Services\interfaces\" />

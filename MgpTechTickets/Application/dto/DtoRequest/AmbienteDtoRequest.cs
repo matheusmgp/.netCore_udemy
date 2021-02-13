@@ -1,21 +1,14 @@
-﻿using MgpTechTickets.Domain.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MgpTechTickets.Models
+namespace MgpTechTickets.Application.dto.DtoRequest
 {
-    public class Ambiente : BaseModel
+    public class AmbienteDtoRequest :BaseDtoModel
     {
-        public Ambiente()
+        public AmbienteDtoRequest(string nomeFantasia, string razaoSocial, string cnpj, string cpf, string email)
         {
-
-        }
-
-        public Ambiente(string nomeFantasia, string razaoSocial, string cnpj, string cpf, string email)
-        {
-           
             NomeFantasia = nomeFantasia;
             RazaoSocial = razaoSocial;
             Cnpj = cnpj;
@@ -23,7 +16,6 @@ namespace MgpTechTickets.Models
             Email = email;
         }
 
-       
         public string NomeFantasia { get; set; }
         public string RazaoSocial { get; set; }
         public string Cnpj { get; set; }

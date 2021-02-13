@@ -12,16 +12,14 @@ namespace MgpTechTickets.Models
 
         }
 
-        public Cliente(int id, string cliNome, int ambienteId)
+        public Cliente(string cliNome)
         {
-            Id = id;
+           
             CliNome = cliNome;
-            AmbienteId = ambienteId;
         }
 
-        public int Id { get; set; }
+      
         public string CliNome { get; set; }
-        public int AmbienteId { get; set; }
         public Ambiente Ambiente { get; set; }
     }
 }

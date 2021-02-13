@@ -1,20 +1,13 @@
-﻿using MgpTechTickets.Domain.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MgpTechTickets.Models
+namespace MgpTechTickets.Application.dto.DtoReponse
 {
-    public class FilialEndereco : BaseModel
+    public class FilialEnderecoDtoResponse : BaseDtoModel
     {
-        public FilialEndereco()
-        {
-
-        }
-
-
-        public Filial FilialId { get; set; }
+        public int FilialId { get; set; }
         public string Logradouro { get; set; }
         public string Cidade { get; set; }
         public string Bairro { get; set; }

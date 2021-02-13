@@ -19,9 +19,9 @@ namespace MgpTechTickets.Models
             Senha = senha;           
           
         }
-        public Users(int id , string nome, string email, string senha, string token)
+        public Users(string nome, string email, string senha, string token)
         {
-            Id = id;
+           
             Nome = nome;
             Email = email;
             Senha = senha;

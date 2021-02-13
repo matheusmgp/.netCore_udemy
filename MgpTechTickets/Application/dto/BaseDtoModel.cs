@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MgpTechTickets.Domain.Models
+namespace MgpTechTickets.Application.dto
 {
-    public  abstract class BaseModel
+    public abstract class BaseDtoModel
     {
         public int Id { get; set; }
     }
