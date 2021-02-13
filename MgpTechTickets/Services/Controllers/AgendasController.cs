@@ -7,6 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MgpTechTickets.Data;
 using MgpTechTickets.Models;
+using MgpTechTickets.Application.service;
+using MgpTechTickets.Services.interfaces;
+using MgpTechTickets.Domain.interfaces.repositories;
+using MgpTechTickets.Application.dto.DtoReponse;
+using MgpTechTickets.Application.dto.DtoRequest;
+using AutoMapper;
 
 namespace MgpTechTickets.Services.Controllers
 {
@@ -14,97 +20,60 @@ namespace MgpTechTickets.Services.Controllers
     [ApiController]
     public class AgendasController : ControllerBase
     {
-        private readonly DataContext _context;
+        
+        private readonly IBaseRepository<Agenda> _ibaseRepository;
+        private readonly IMapper _mapper;
 
-        public AgendasController(DataContext context)
+        public AgendasController(IBaseRepository<Agenda> ibaseRepository, IMapper mapper)
         {
-            _context = context;
+            _mapper = mapper;
+            _ibaseRepository = ibaseRepository;
         }
 
-        // GET: api/Agendas
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Agenda>>> GetAgendas()
         {
-            return await _context.Agendas.ToListAsync();
+            var agendas =  await _ibaseRepository.findAll().ConfigureAwait(true);
+
+            return Ok(_mapper.Map<IEnumerable<AgendaDtoResponse>>(agendas));
+           
         }
 
-        // GET: api/Agendas/5
+      
         [HttpGet("{id}")]
         public async Task<ActionResult<Agenda>> GetAgenda(int id)
         {
-            var agenda = await _context.Agendas.FindAsync(id);
+            var agenda = await _ibaseRepository.findById(id).ConfigureAwait(true);
 
             if (agenda == null)
             {
                 return NotFound();
             }
 
-            return agenda;
+            return Ok(_mapper.Map<AgendaDtoResponse>(agenda));
         }
 
-        // PUT: api/Agendas/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAgenda(int id, Agenda agenda)
+        public void PutAgenda(int id, AgendaDtoRequest agendaDtoRequest)
         {
-            if (id != agenda.Id)
+            var agenda = _mapper.Map<Agenda>(agendaDtoRequest);
+            if (id == agenda.Id)
             {
-                return BadRequest();
+                _ibaseRepository.update(id,agenda);
             }
-
-            _context.Entry(agenda).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AgendaExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+           
         }
 
-        // POST: api/Agendas
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Agenda>> PostAgenda(Agenda agenda)
+        public void PostAgenda(AgendaDtoRequest agendaDtoRequest)
         {
-            _context.Agendas.Add(agenda);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetAgenda", new { id = agenda.Id }, agenda);
+            var agenda = _mapper.Map<Agenda>(agendaDtoRequest);
+            
+             _ibaseRepository.create(agenda);
+            
         }
 
-        // DELETE: api/Agendas/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Agenda>> DeleteAgenda(int id)
-        {
-            var agenda = await _context.Agendas.FindAsync(id);
-            if (agenda == null)
-            {
-                return NotFound();
-            }
-
-            _context.Agendas.Remove(agenda);
-            await _context.SaveChangesAsync();
-
-            return agenda;
-        }
-
-        private bool AgendaExists(int id)
-        {
-            return _context.Agendas.Any(e => e.Id == id);
-        }
+        
+      
     }
 }

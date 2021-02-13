@@ -42,9 +42,6 @@ namespace MgpTechTickets.Services.Controllers
             return ambiente;
         }
 
-        // PUT: api/Ambientes/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAmbiente(int id, Ambiente ambiente)
         {

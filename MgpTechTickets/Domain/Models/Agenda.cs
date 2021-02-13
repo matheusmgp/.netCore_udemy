@@ -24,6 +24,7 @@ namespace MgpTechTickets.Models
         public string Telefone { get; set; }
         public string Email { get; set; }
         public string Observacao { get; set; }
+        public int AmbienteId { get; set; }
         public Ambiente Ambiente { get; set; }
     }
 }
