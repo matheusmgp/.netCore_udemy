@@ -12,8 +12,8 @@ namespace MgpTechTickets.Models
         {
 
         }
-        public Pendencia ChamadoFilhoId { get; set; }
+        public Pendencia ChamadoFilho { get; set; }
         public string PathName { get; set; }
-        public Ambiente AmbienteId { get; set; }
+        public Ambiente Ambiente { get; set; }
     }
 }

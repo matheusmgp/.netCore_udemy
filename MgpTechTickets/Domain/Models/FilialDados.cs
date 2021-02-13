@@ -1,11 +1,13 @@
 ﻿using MgpTechTickets.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace MgpTechTickets.Models
 {
+    [Table("FilialDados")]
     public class FilialDados : BaseModel
     {
         public FilialDados()
@@ -14,7 +16,7 @@ namespace MgpTechTickets.Models
         }
 
        
-        public Filial FilialId { get; set; }
+        public Filial Filial { get; set; }
         public string NomeRepre { get; set; }
         public string NomeFinan { get; set; }
         public string CpfRepre { get; set; }

@@ -17,7 +17,7 @@ namespace MgpTechTickets.Application.dto.DtoRequest
             CanalId = canalId;
             Status = status;
             DataAbertura = dataAbertura;
-            Ambiente = ambiente;
+            AmbienteId = ambiente;
         }
 
         public int UserId { get; set; }
