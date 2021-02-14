@@ -160,4 +160,10 @@ E:\projetos\.net Core\curso_udemy\MgpTech\MgpTechTickets\bin\Debug\netcoreapp3.1
 E:\projetos\.net Core\curso_udemy\MgpTech\MgpTechTickets\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 E:\projetos\.net Core\curso_udemy\MgpTech\MgpTechTickets\bin\Debug\netcoreapp3.1\AutoMapper.dll
 E:\projetos\.net Core\curso_udemy\MgpTech\MgpTechTickets\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+E:\projetos\.net Core\curso_udemy\MgpTech\MgpTechTickets\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+E:\projetos\.net Core\curso_udemy\MgpTech\MgpTechTickets\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+E:\projetos\.net Core\curso_udemy\MgpTech\MgpTechTickets\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+E:\projetos\.net Core\curso_udemy\MgpTech\MgpTechTickets\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+E:\projetos\.net Core\curso_udemy\MgpTech\MgpTechTickets\obj\Debug\netcoreapp3.1\MgpTechTickets.MvcApplicationPartsAssemblyInfo.cs
 E:\projetos\.net Core\curso_udemy\MgpTech\MgpTechTickets\obj\Debug\netcoreapp3.1\MgpTechTickets.MvcApplicationPartsAssemblyInfo.cache
+E:\projetos\.net Core\curso_udemy\MgpTech\MgpTechTickets\bin\Debug\netcoreapp3.1\MgpTechTickets.xml

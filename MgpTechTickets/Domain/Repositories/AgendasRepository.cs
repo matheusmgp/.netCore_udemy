@@ -34,9 +34,9 @@ namespace MgpTechTickets.Domain.repositories
             return  await _dataContext.Agendas.FindAsync(id);
         }
 
-        public bool SaveChanges()
-        {
-           return ( _dataContext.SaveChanges() > 0) ;
+        public async void Create(Agenda entity)
+        {   
+            _dataContext.Add(entity);
         }
 
         public void Update(int id, Agenda entity) 
@@ -49,19 +49,13 @@ namespace MgpTechTickets.Domain.repositories
                     _dataContext.Update(entity);
                 }
             }
-           
-
             
         }
 
-        public async void Create(Agenda entity)
+        public bool SaveChanges()
         {
-            
-           // var ambiente = await _dataContext.Ambientes.FindAsync(entity.AmbienteId).ConfigureAwait(true);
-
-           // entity.Ambiente = ambiente;
-
-            _dataContext.Add(entity);
+            return (_dataContext.SaveChanges() > 0);
         }
+
     }
 }

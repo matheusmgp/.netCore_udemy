@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MgpTechTickets.Data;
 using MgpTechTickets.Models;
+using MgpTechTickets.Services.interfaces;
+using AutoMapper;
+using MgpTechTickets.Application.dto.DtoReponse;
+using MgpTechTickets.Application.dto.DtoRequest;
 
 namespace MgpTechTickets.Services.Controllers
 {
@@ -14,97 +18,71 @@ namespace MgpTechTickets.Services.Controllers
     [ApiController]
     public class CanaisController : ControllerBase
     {
-        private readonly DataContext _context;
-
-        public CanaisController(DataContext context)
+        private readonly ICanaisService _icanaisService;
+        private readonly IAmbienteService _iAmbienteRepository;
+        private readonly IMapper _mapper;
+        public CanaisController(ICanaisService icanaisServicet,
+                                IAmbienteService iAmbienteRepository,
+                                IMapper mapper)
         {
-            _context = context;
+            _icanaisService = icanaisServicet;
+            _iAmbienteRepository = iAmbienteRepository;
+            _mapper = mapper;
         }
-
-        // GET: api/Canais
+               
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CanaisComunicacao>>> GetCanais()
+        public async Task<ActionResult<IEnumerable<CanaisComunicacao>>> Get()
         {
-            return await _context.Canais.ToListAsync();
+            var canais = await _icanaisService.FindAllAsync();
+
+            return Ok(_mapper.Map<IEnumerable<CanaisComunicacaoDtoResponse>>(canais));
         }
 
-        // GET: api/Canais/5
+      
         [HttpGet("{id}")]
         public async Task<ActionResult<CanaisComunicacao>> GetCanaisComunicacao(int id)
         {
-            var canaisComunicacao = await _context.Canais.FindAsync(id);
+            var canal = await _icanaisService.FindByIdAsync(id);
 
-            if (canaisComunicacao == null)
+            if (canal == null)
             {
                 return NotFound();
             }
 
-            return canaisComunicacao;
+            return Ok(_mapper.Map<CanaisComunicacaoDtoResponse>(canal));
         }
 
-        // PUT: api/Canais/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCanaisComunicacao(int id, CanaisComunicacao canaisComunicacao)
+        public async Task<IActionResult> Put(int id, CanaisComunicacaoDtoRequest canaisComunicacaoDtoRequest)
         {
-            if (id != canaisComunicacao.Id)
+            var canal = _mapper.Map<CanaisComunicacao>(canaisComunicacaoDtoRequest);
+            _icanaisService.Update(id, canal);
+            if (_icanaisService.SaveChanges())
             {
-                return BadRequest();
+                return Ok(canal);
             }
 
-            _context.Entry(canaisComunicacao).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CanaisComunicacaoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return BadRequest("Falha no procedimento");
         }
 
-        // POST: api/Canais
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+     
         [HttpPost]
-        public async Task<ActionResult<CanaisComunicacao>> PostCanaisComunicacao(CanaisComunicacao canaisComunicacao)
+        public async Task<ActionResult<CanaisComunicacao>> Post(CanaisComunicacaoDtoRequest canaisComunicacaoDtoRequest)
         {
-            _context.Canais.Add(canaisComunicacao);
-            await _context.SaveChangesAsync();
+            var canal = _mapper.Map<CanaisComunicacao>(canaisComunicacaoDtoRequest);
 
-            return CreatedAtAction("GetCanaisComunicacao", new { id = canaisComunicacao.Id }, canaisComunicacao);
-        }
+            var ambiente = await _iAmbienteRepository.FindByIdAsync(canal.AmbienteId);
 
-        // DELETE: api/Canais/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<CanaisComunicacao>> DeleteCanaisComunicacao(int id)
-        {
-            var canaisComunicacao = await _context.Canais.FindAsync(id);
-            if (canaisComunicacao == null)
+            canal.Ambiente = ambiente;
+            _icanaisService.Create(canal);
+            if (_icanaisService.SaveChanges())
             {
-                return NotFound();
+                return Ok(canal);
             }
 
-            _context.Canais.Remove(canaisComunicacao);
-            await _context.SaveChangesAsync();
-
-            return canaisComunicacao;
+            return BadRequest("Falha no procedimento");
         }
 
-        private bool CanaisComunicacaoExists(int id)
-        {
-            return _context.Canais.Any(e => e.Id == id);
-        }
+       
     }
 }

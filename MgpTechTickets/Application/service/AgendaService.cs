@@ -39,6 +39,7 @@ namespace MgpTechTickets.Application.service
         {
             _agendasRepository.Update(id, entity);
         }
+
         public bool SaveChanges()
         {
             return _agendasRepository.SaveChanges();

@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MgpTechTickets.Data;
 using MgpTechTickets.Models;
+using MgpTechTickets.Services.interfaces;
+using AutoMapper;
+using MgpTechTickets.Application.dto.DtoReponse;
+using MgpTechTickets.Application.dto.DtoRequest;
 
 namespace MgpTechTickets.Services.Controllers
 {
@@ -14,97 +18,74 @@ namespace MgpTechTickets.Services.Controllers
     [ApiController]
     public class CategoriasController : ControllerBase
     {
-        private readonly DataContext _context;
-
-        public CategoriasController(DataContext context)
+        private readonly ICategoriaService _categoriaService;
+        private readonly IAmbienteService _iAmbienteRepository;
+        private readonly IMapper _mapper;
+        public CategoriasController(ICategoriaService categoriaService,
+                                    IMapper mapper,
+                                    IAmbienteService iAmbienteRepository)
         {
-            _context = context;
+            _categoriaService = categoriaService;
+            _mapper = mapper;
+            _iAmbienteRepository = iAmbienteRepository;
         }
 
-        // GET: api/Categorias
+        
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Categoria>>> GetCategorias()
+        public async Task<ActionResult<IEnumerable<CategoriaDtoResponse>>> GetCategorias()
         {
-            return await _context.Categorias.ToListAsync();
+            var categorias = await _categoriaService.FindAllAsync();
+
+            return Ok(_mapper.Map<IEnumerable<CategoriaDtoResponse>>(categorias));
         }
 
-        // GET: api/Categorias/5
+        
         [HttpGet("{id}")]
-        public async Task<ActionResult<Categoria>> GetCategoria(int id)
+        public async Task<ActionResult<CategoriaDtoResponse>> GetCategoria(int id)
         {
-            var categoria = await _context.Categorias.FindAsync(id);
+            var categoria = await _categoriaService.FindByIdAsync(id);
 
             if (categoria == null)
             {
                 return NotFound();
             }
 
-            return categoria;
+            return Ok(_mapper.Map<CategoriaDtoResponse>(categoria));
         }
 
-        // PUT: api/Categorias/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategoria(int id, Categoria categoria)
+        public async Task<IActionResult> PutCategoria(int id, CategoriaDtoRequest categoriaDtoRequest)
         {
-            if (id != categoria.Id)
+            var categoria = _mapper.Map<Categoria>(categoriaDtoRequest);
+            _categoriaService.Update(id, categoria);
+            if (_categoriaService.SaveChanges())
             {
-                return BadRequest();
+                return Ok(categoria);
             }
 
-            _context.Entry(categoria).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CategoriaExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return BadRequest("Falha no procedimento");
         }
 
-        // POST: api/Categorias
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+       
         [HttpPost]
-        public async Task<ActionResult<Categoria>> PostCategoria(Categoria categoria)
+        public async Task<ActionResult<Categoria>> PostCategoria(CategoriaDtoRequest categoriaDtoRequest)
         {
-            _context.Categorias.Add(categoria);
-            await _context.SaveChangesAsync();
+            var categoria = _mapper.Map<Categoria>(categoriaDtoRequest);
 
-            return CreatedAtAction("GetCategoria", new { id = categoria.Id }, categoria);
-        }
+            var ambiente = await _iAmbienteRepository.FindByIdAsync(categoria.AmbienteId);
 
-        // DELETE: api/Categorias/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Categoria>> DeleteCategoria(int id)
-        {
-            var categoria = await _context.Categorias.FindAsync(id);
-            if (categoria == null)
+            categoria.Ambiente = ambiente;
+            _categoriaService.Create(categoria);
+            if (_categoriaService.SaveChanges())
             {
-                return NotFound();
+                return Ok(categoria);
             }
 
-            _context.Categorias.Remove(categoria);
-            await _context.SaveChangesAsync();
-
-            return categoria;
+            return BadRequest("Falha no procedimento");
         }
 
-        private bool CategoriaExists(int id)
-        {
-            return _context.Categorias.Any(e => e.Id == id);
-        }
+        
+       
     }
 }

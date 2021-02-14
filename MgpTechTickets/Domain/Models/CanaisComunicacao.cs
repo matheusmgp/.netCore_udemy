@@ -22,6 +22,7 @@ namespace MgpTechTickets.Models
 
         public string Nome { get; set; }
         public string Status_ { get; set; }
+        public int AmbienteId { get; set; }
         public Ambiente Ambiente { get; set; }
     }
 }

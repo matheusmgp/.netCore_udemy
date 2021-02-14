@@ -15,14 +15,16 @@ namespace MgpTechTickets.Models
 
         }
 
-        public Categoria(string nome, string status_)
+        public Categoria(string nome, string status_, int ambienteId)
         {
             Nome = nome;
             Status_ = status_;
+            AmbienteId = ambienteId;
         }
 
         public string Nome { get; set; }
         public string Status_ { get; set; }
+        public int AmbienteId { get; set; }
         public Ambiente Ambiente { get; set; }
     }
 }

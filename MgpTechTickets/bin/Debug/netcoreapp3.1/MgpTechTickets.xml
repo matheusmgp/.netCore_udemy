@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MgpTechTickets</name>
+    </assembly>
+    <members>
+        <member name="T:MgpTechTickets.Services.Controllers.AgendasController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MgpTechTickets.Services.Controllers.AgendasController.#ctor(MgpTechTickets.Services.interfaces.IAgendaService,MgpTechTickets.Services.interfaces.IAmbienteService,AutoMapper.IMapper)">
+            <summary>
+            
+            </summary>
+            <param name="agendaService"></param>
+            <param name="iAmbienteService"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:MgpTechTickets.Services.Controllers.AgendasController.Get">
+            <summary>
+            Endpoint responsável por retornar todas as agendas do banco de dados.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MgpTechTickets.Services.Controllers.AgendasController.GetById(System.Int32)">
+            <summary>
+            Endpoint responsável por retornar um agenda com um ID especifico.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>           
+        </member>
+        <member name="M:MgpTechTickets.Services.Controllers.AgendasController.Put(System.Int32,MgpTechTickets.Application.dto.DtoRequest.AgendaDtoRequest)">
+            <summary>
+            Endpoint responsável por atualizar uma agenda no banco.
+            </summary>
+            <param name="id"></param>
+            <param name="agendaDtoRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MgpTechTickets.Services.Controllers.AgendasController.Post(MgpTechTickets.Application.dto.DtoRequest.AgendaDtoRequest)">
+            <summary>
+            Endpoint responsável por crair uma agenda no banco.
+            </summary>
+            <param name="agendaDtoRequest"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
