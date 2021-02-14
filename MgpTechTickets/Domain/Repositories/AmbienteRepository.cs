@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MgpTechTickets.Domain.Repositories
 {
-    public class AmbienteRepository : IBaseRepository<Ambiente>
+    public class AmbienteRepository : IAmbienteRepository
     {
         private readonly DataContext _dataContext;
 

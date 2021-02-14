@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MgpTechTickets.Domain.repositories
 {
-    public class AgendasRepository : IBaseRepository<Agenda>
+    public class AgendasRepository : IAgendaRepository
     {
         private readonly DataContext _dataContext;
 
@@ -57,9 +57,9 @@ namespace MgpTechTickets.Domain.repositories
         public async void Create(Agenda entity)
         {
             
-            var ambiente = await _dataContext.Ambientes.FindAsync(entity.AmbienteId).ConfigureAwait(true);
+           // var ambiente = await _dataContext.Ambientes.FindAsync(entity.AmbienteId).ConfigureAwait(true);
 
-            entity.Ambiente = ambiente;
+           // entity.Ambiente = ambiente;
 
             _dataContext.Add(entity);
         }

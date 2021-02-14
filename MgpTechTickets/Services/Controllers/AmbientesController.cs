@@ -10,6 +10,7 @@ using AutoMapper;
 using MgpTechTickets.Domain.interfaces.repositories;
 using MgpTechTickets.Application.dto.DtoReponse;
 using MgpTechTickets.Application.dto.DtoRequest;
+using MgpTechTickets.Services.interfaces;
 
 namespace MgpTechTickets.Services.Controllers
 {
@@ -17,19 +18,19 @@ namespace MgpTechTickets.Services.Controllers
     [ApiController]
     public class AmbientesController : ControllerBase
     {
-        private readonly IBaseRepository<Ambiente> _ibaseRepository;
+        private readonly IAmbienteService _iAmbienteService;
         private readonly IMapper _mapper;
 
-        public AmbientesController(IBaseRepository<Ambiente> ibaseRepository, IMapper mapper)
+        public AmbientesController(IAmbienteService iAmbienteService, IMapper mapper)
         {
             _mapper = mapper;
-            _ibaseRepository = ibaseRepository;
+            _iAmbienteService = iAmbienteService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Ambiente>>> Get()
         {
-            var ambientes = await _ibaseRepository.FindAllAsync();
+            var ambientes = await _iAmbienteService.FindAllAsync();
 
             return Ok(_mapper.Map<IEnumerable<AmbienteDtoResponse>>(ambientes));
 
@@ -38,7 +39,7 @@ namespace MgpTechTickets.Services.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Ambiente>> GetById(int id)
         {
-            var ambiente = await _ibaseRepository.FindByIdAsync(id);
+            var ambiente = await _iAmbienteService.FindByIdAsync(id);
 
             if (ambiente == null)
             {
@@ -52,8 +53,8 @@ namespace MgpTechTickets.Services.Controllers
         public ActionResult Put(int id, AmbienteDtoRequest ambienteDtoRequest)
         {
             var ambiente = _mapper.Map<Ambiente>(ambienteDtoRequest);
-            _ibaseRepository.Update(id, ambiente);
-            if (_ibaseRepository.SaveChanges())
+            _iAmbienteService.Update(id, ambiente);
+            if (_iAmbienteService.SaveChanges())
             {
                 return Ok(ambiente);
             }
@@ -67,8 +68,8 @@ namespace MgpTechTickets.Services.Controllers
         {
             var ambiente = _mapper.Map<Ambiente>(ambienteDtoRequest);
 
-            _ibaseRepository.Create(ambiente);
-            if (_ibaseRepository.SaveChanges())
+            _iAmbienteService.Create(ambiente);
+            if (_iAmbienteService.SaveChanges())
             {
                 return Ok(ambiente);
             }

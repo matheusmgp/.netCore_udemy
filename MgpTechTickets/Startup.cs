@@ -33,8 +33,20 @@ namespace MgpTechTickets
                     context => context.UseSqlite(Configuration.GetConnectionString("Default")));
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddScoped<IBaseRepository<Agenda>, AgendasRepository>();                 
+
+            services.AddScoped<IAgendaRepository, AgendasRepository>();                 
+            services.AddScoped<IAmbienteRepository, AmbienteRepository>();
+
+            services.AddScoped<IBaseRepository<Agenda>, AgendasRepository>();
             services.AddScoped<IBaseRepository<Ambiente>, AmbienteRepository>();
+
+            services.AddScoped<IServiceBase<Agenda>, AgendaService>();
+            services.AddScoped<IServiceBase<Ambiente>, AmbienteService>();
+
+            services.AddScoped<IAmbienteService, AmbienteService>();
+            services.AddScoped<IAgendaService, AgendaService>();
+
+            
 
             services.AddControllers();
         }

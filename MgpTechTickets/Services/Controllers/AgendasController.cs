@@ -7,6 +7,7 @@ using MgpTechTickets.Application.dto.DtoReponse;
 using MgpTechTickets.Application.dto.DtoRequest;
 using AutoMapper;
 using System.Threading.Tasks;
+using MgpTechTickets.Services.interfaces;
 
 namespace MgpTechTickets.Services.Controllers
 {
@@ -15,20 +16,25 @@ namespace MgpTechTickets.Services.Controllers
     public class AgendasController : ControllerBase
     {
         
-        private readonly IBaseRepository<Agenda> _ibaseRepository;
+        private readonly IAgendaService _iAgendaRepository = null;
+        private readonly IAmbienteService _iAmbienteRepository = null;
         private readonly IMapper _mapper;
        
 
-        public AgendasController(IBaseRepository<Agenda> ibaseRepository, IMapper mapper)
+        public AgendasController(IAgendaService agendaRepository,
+                                 IAmbienteService iAmbienteRepository,
+                                 IMapper mapper)
         {
             _mapper = mapper;
-            _ibaseRepository = ibaseRepository;           
+            _iAmbienteRepository = iAmbienteRepository;
+            _iAgendaRepository = agendaRepository;
+            
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Agenda>>> Get()
         {
-            var agendas =  await _ibaseRepository.FindAllAsync();
+            var agendas =  await _iAgendaRepository.FindAllAsync();
            
             return Ok(_mapper.Map<IEnumerable<AgendaDtoResponse>>(agendas));
            
@@ -37,7 +43,7 @@ namespace MgpTechTickets.Services.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Agenda>> GetById(int id)
         {
-            var agenda = await _ibaseRepository.FindByIdAsync(id);
+            var agenda = await _iAgendaRepository.FindByIdAsync(id);
 
             if (agenda == null)
             {
@@ -51,8 +57,8 @@ namespace MgpTechTickets.Services.Controllers
         public ActionResult Put(int id, AgendaDtoRequest agendaDtoRequest)
         {
             var agenda = _mapper.Map<Agenda>(agendaDtoRequest);
-            _ibaseRepository.Update(id,agenda);
-            if (_ibaseRepository.SaveChanges())
+            _iAgendaRepository.Update(id,agenda);
+            if (_iAgendaRepository.SaveChanges())
             {
                 return Ok(agenda);
             }
@@ -62,12 +68,17 @@ namespace MgpTechTickets.Services.Controllers
         }
 
         [HttpPost]
-        public  ActionResult Post(AgendaDtoRequest agendaDtoRequest)
+        public  async Task<ActionResult> Post(AgendaDtoRequest agendaDtoRequest)
         {
             var agenda = _mapper.Map<Agenda>(agendaDtoRequest);
 
-            _ibaseRepository.Create(agenda);
-            if (_ibaseRepository.SaveChanges())
+            var ambiente = await _iAmbienteRepository.FindByIdAsync(agenda.AmbienteId);
+
+            agenda.Ambiente = ambiente;
+            
+
+            _iAgendaRepository.Create(agenda);
+            if (_iAgendaRepository.SaveChanges())
             {
                 return Ok(agenda);
             }
