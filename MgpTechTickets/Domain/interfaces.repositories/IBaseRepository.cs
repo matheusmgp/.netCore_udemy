@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace MgpTechTickets.Domain.interfaces.repositories
 {
-     public interface IBaseRepository<T>
+     public interface IBaseRepository<Entity>
     {
-        Task<IEnumerable<T>> findAll();
-        Task<T> findById(int id);
-        void create<T>(T entity) where T : class;
-        int delete(int id);
-        void update<T>(int id, T entity) where T : class;
+        Task<IEnumerable<Entity>> FindAllAsync();
+        Task<Entity> FindByIdAsync(int id);
+        void Create(Entity entity);        
+        void Update(int id, Entity entity);
+        bool SaveChanges();
     }
 }

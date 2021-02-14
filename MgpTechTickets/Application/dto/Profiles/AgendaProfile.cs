@@ -10,7 +10,9 @@ namespace MgpTechTickets.Application.dto.Profiles
         public AgendaProfile()
         {
             CreateMap<Agenda, AgendaDtoRequest>();
+            CreateMap<AgendaDtoRequest, Agenda>();
             CreateMap<Agenda, AgendaDtoResponse>();
         }
+
     }
 }

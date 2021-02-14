@@ -4,6 +4,7 @@ using MgpTechTickets.Application.service;
 using MgpTechTickets.Data;
 using MgpTechTickets.Domain.interfaces.repositories;
 using MgpTechTickets.Domain.repositories;
+using MgpTechTickets.Domain.Repositories;
 using MgpTechTickets.Models;
 using MgpTechTickets.Services.interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -32,7 +33,8 @@ namespace MgpTechTickets
                     context => context.UseSqlite(Configuration.GetConnectionString("Default")));
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddScoped<IBaseRepository<Agenda>, AgendasRepository>();
+            services.AddScoped<IBaseRepository<Agenda>, AgendasRepository>();                 
+            services.AddScoped<IBaseRepository<Ambiente>, AmbienteRepository>();
 
             services.AddControllers();
         }

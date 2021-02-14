@@ -1,12 +1,15 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MgpTechTickets.Data;
 using MgpTechTickets.Models;
+using AutoMapper;
+using MgpTechTickets.Domain.interfaces.repositories;
+using MgpTechTickets.Application.dto.DtoReponse;
+using MgpTechTickets.Application.dto.DtoRequest;
 
 namespace MgpTechTickets.Services.Controllers
 {
@@ -14,94 +17,67 @@ namespace MgpTechTickets.Services.Controllers
     [ApiController]
     public class AmbientesController : ControllerBase
     {
-        private readonly DataContext _context;
+        private readonly IBaseRepository<Ambiente> _ibaseRepository;
+        private readonly IMapper _mapper;
 
-        public AmbientesController(DataContext context)
+        public AmbientesController(IBaseRepository<Ambiente> ibaseRepository, IMapper mapper)
         {
-            _context = context;
+            _mapper = mapper;
+            _ibaseRepository = ibaseRepository;
         }
 
-        // GET: api/Ambientes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Ambiente>>> GetAmbientes()
+        public async Task<ActionResult<IEnumerable<Ambiente>>> Get()
         {
-            return await _context.Ambientes.ToListAsync();
+            var ambientes = await _ibaseRepository.FindAllAsync();
+
+            return Ok(_mapper.Map<IEnumerable<AmbienteDtoResponse>>(ambientes));
+
         }
 
-        // GET: api/Ambientes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Ambiente>> GetAmbiente(int id)
+        public async Task<ActionResult<Ambiente>> GetById(int id)
         {
-            var ambiente = await _context.Ambientes.FindAsync(id);
+            var ambiente = await _ibaseRepository.FindByIdAsync(id);
 
             if (ambiente == null)
             {
                 return NotFound();
             }
 
-            return ambiente;
+            return Ok(_mapper.Map<AmbienteDtoResponse>(ambiente));
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAmbiente(int id, Ambiente ambiente)
+        public ActionResult Put(int id, AmbienteDtoRequest ambienteDtoRequest)
         {
-            if (id != ambiente.Id)
+            var ambiente = _mapper.Map<Ambiente>(ambienteDtoRequest);
+            _ibaseRepository.Update(id, ambiente);
+            if (_ibaseRepository.SaveChanges())
             {
-                return BadRequest();
+                return Ok(ambiente);
             }
 
-            _context.Entry(ambiente).State = EntityState.Modified;
+            return BadRequest("Falha no procedimento");
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AmbienteExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
         }
 
-        // POST: api/Ambientes
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Ambiente>> PostAmbiente(Ambiente ambiente)
+        public ActionResult Post(AmbienteDtoRequest ambienteDtoRequest)
         {
-            _context.Ambientes.Add(ambiente);
-            await _context.SaveChangesAsync();
+            var ambiente = _mapper.Map<Ambiente>(ambienteDtoRequest);
 
-            return CreatedAtAction("GetAmbiente", new { id = ambiente.Id }, ambiente);
-        }
-
-        // DELETE: api/Ambientes/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Ambiente>> DeleteAmbiente(int id)
-        {
-            var ambiente = await _context.Ambientes.FindAsync(id);
-            if (ambiente == null)
+            _ibaseRepository.Create(ambiente);
+            if (_ibaseRepository.SaveChanges())
             {
-                return NotFound();
+                return Ok(ambiente);
             }
 
-            _context.Ambientes.Remove(ambiente);
-            await _context.SaveChangesAsync();
-
-            return ambiente;
+            return BadRequest("Falha no procedimento");
         }
 
-        private bool AmbienteExists(int id)
-        {
-            return _context.Ambientes.Any(e => e.Id == id);
-        }
+
+
     }
 }
+

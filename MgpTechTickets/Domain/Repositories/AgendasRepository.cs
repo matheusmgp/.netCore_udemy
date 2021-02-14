@@ -18,34 +18,50 @@ namespace MgpTechTickets.Domain.repositories
         {
             _dataContext = dataContext;
         }
+                     
 
-        public void create<T>(T entity) where T : class
-        {
-             _dataContext.Add(entity);
-        }
-
-        public int delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IEnumerable<Agenda>> findAll()
+        public async Task<IEnumerable<Agenda>> FindAllAsync()
         {
             IQueryable<Agenda> query =  _dataContext.Agendas;
 
-            query = query.AsNoTracking().OrderBy(a => a.Id);
+            query =  query.AsNoTracking().OrderBy(a => a.Id);
 
-            return  query.ToArray();
+            return  await query.ToArrayAsync();
         }
 
-        public async Task<Agenda> findById(int id)
+        public async Task<Agenda> FindByIdAsync(int id)
         {
-            return await _dataContext.Agendas.FindAsync(id);
+            return  await _dataContext.Agendas.FindAsync(id);
         }
 
-        public void update<T>(int id, T entity) where T : class
+        public bool SaveChanges()
         {
-            throw new NotImplementedException();
+           return ( _dataContext.SaveChanges() > 0) ;
+        }
+
+        public void Update(int id, Agenda entity) 
+        {
+            if (id > 0)
+            {
+                var OldAgenda = _dataContext.Agendas.AsNoTracking().FirstOrDefault(a => a.Id == id);
+                if(OldAgenda != null)
+                {
+                    _dataContext.Update(entity);
+                }
+            }
+           
+
+            
+        }
+
+        public async void Create(Agenda entity)
+        {
+            
+            var ambiente = await _dataContext.Ambientes.FindAsync(entity.AmbienteId).ConfigureAwait(true);
+
+            entity.Ambiente = ambiente;
+
+            _dataContext.Add(entity);
         }
     }
 }
