@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MgpTechTickets.Migrations
 {
-    public partial class init : Migration
+    public partial class sqlservrIiial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,13 +11,13 @@ namespace MgpTechTickets.Migrations
                 name: "Ambientes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    NomeFantasia = table.Column<string>(nullable: false),
-                    RazaoSocial = table.Column<string>(nullable: false),
-                    Cnpj = table.Column<string>(nullable: true),
-                    Cpf = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NomeFantasia = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RazaoSocial = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cnpj = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cpf = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -28,13 +28,13 @@ namespace MgpTechTickets.Migrations
                 name: "Agendas",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Nome = table.Column<string>(nullable: false),
-                    Telefone = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(nullable: true),
-                    Observacao = table.Column<string>(nullable: true),
-                    AmbienteId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Telefone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Observacao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AmbienteId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -44,18 +44,18 @@ namespace MgpTechTickets.Migrations
                         column: x => x.AmbienteId,
                         principalTable: "Ambientes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Canais",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Nome = table.Column<string>(nullable: false),
-                    Status_ = table.Column<string>(nullable: false),
-                    AmbienteId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status_ = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AmbienteId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -65,18 +65,18 @@ namespace MgpTechTickets.Migrations
                         column: x => x.AmbienteId,
                         principalTable: "Ambientes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Categorias",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Nome = table.Column<string>(nullable: false),
-                    Status_ = table.Column<string>(nullable: false),
-                    AmbienteId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status_ = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AmbienteId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -86,17 +86,17 @@ namespace MgpTechTickets.Migrations
                         column: x => x.AmbienteId,
                         principalTable: "Ambientes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Clientes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CliNome = table.Column<string>(nullable: false),
-                    AmbienteId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CliNome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AmbienteId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -113,13 +113,13 @@ namespace MgpTechTickets.Migrations
                 name: "Filiais",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    FilCnpj = table.Column<string>(nullable: false),
-                    FilRazsoc = table.Column<string>(nullable: false),
-                    FilStatus = table.Column<string>(nullable: false),
-                    FilNomefant = table.Column<string>(nullable: false),
-                    AmbienteId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FilCnpj = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FilRazsoc = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FilStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FilNomefant = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AmbienteId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -133,13 +133,35 @@ namespace MgpTechTickets.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Procedimentos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AmbienteId = table.Column<int>(type: "int", nullable: true),
+                    DescricaoValue = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status_ = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Procedimentos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Procedimentos_Ambientes_AmbienteId",
+                        column: x => x.AmbienteId,
+                        principalTable: "Ambientes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Nome = table.Column<string>(nullable: false),
-                    AmbienteId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AmbienteId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -156,14 +178,14 @@ namespace MgpTechTickets.Migrations
                 name: "Setores",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Nome = table.Column<string>(nullable: false),
-                    Status_ = table.Column<string>(nullable: false),
-                    Tempo = table.Column<string>(nullable: false),
-                    TempoRapido = table.Column<string>(nullable: false),
-                    TempoMedio = table.Column<string>(nullable: false),
-                    AmbienteId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status_ = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Tempo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TempoRapido = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TempoMedio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AmbienteId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -180,12 +202,12 @@ namespace MgpTechTickets.Migrations
                 name: "SubCategorias",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Nome = table.Column<string>(nullable: false),
-                    Status_ = table.Column<string>(nullable: false),
-                    CategoriaId = table.Column<int>(nullable: false),
-                    AmbienteId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status_ = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoriaId = table.Column<int>(type: "int", nullable: true),
+                    AmbienteId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -208,17 +230,17 @@ namespace MgpTechTickets.Migrations
                 name: "FilialDados",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    FilialId = table.Column<int>(nullable: false),
-                    NomeRepre = table.Column<string>(nullable: true),
-                    NomeFinan = table.Column<string>(nullable: true),
-                    CpfRepre = table.Column<string>(nullable: true),
-                    EmailFinan = table.Column<string>(nullable: true),
-                    IdentiRepre = table.Column<string>(nullable: true),
-                    TeleFinan = table.Column<string>(nullable: true),
-                    Telefone = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FilialId = table.Column<int>(type: "int", nullable: true),
+                    NomeRepre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NomeFinan = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CpfRepre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailFinan = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdentiRepre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TeleFinan = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Telefone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -235,15 +257,15 @@ namespace MgpTechTickets.Migrations
                 name: "FilialEnderecos",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    FilialId = table.Column<int>(nullable: false),
-                    Logradouro = table.Column<string>(nullable: true),
-                    Cidade = table.Column<string>(nullable: true),
-                    Bairro = table.Column<string>(nullable: true),
-                    Cep = table.Column<string>(nullable: true),
-                    Numero = table.Column<string>(nullable: true),
-                    Complemento = table.Column<string>(nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FilialId = table.Column<int>(type: "int", nullable: true),
+                    Logradouro = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cidade = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Bairro = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cep = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Numero = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Complemento = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -260,13 +282,13 @@ namespace MgpTechTickets.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Nome = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(nullable: false),
-                    Senha = table.Column<string>(nullable: false),
-                    Token = table.Column<string>(nullable: true),
-                    RoleId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Senha = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Token = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RoleId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -283,18 +305,18 @@ namespace MgpTechTickets.Migrations
                 name: "Chamados",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    UserId = table.Column<int>(nullable: false),
-                    FilialId = table.Column<int>(nullable: false),
-                    SetorId = table.Column<int>(nullable: false),
-                    Status_ = table.Column<string>(nullable: false),
-                    Protocolo = table.Column<string>(nullable: false),
-                    UserFinishId = table.Column<int>(nullable: true),
-                    UserRedirectId = table.Column<int>(nullable: true),
-                    DataAbertura = table.Column<DateTime>(nullable: false),
-                    DataFechamento = table.Column<DateTime>(nullable: false),
-                    AmbienteId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: true),
+                    FilialId = table.Column<int>(type: "int", nullable: true),
+                    SetorId = table.Column<int>(type: "int", nullable: true),
+                    Status_ = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Protocolo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserFinishId = table.Column<int>(type: "int", nullable: true),
+                    UserRedirectId = table.Column<int>(type: "int", nullable: true),
+                    DataAbertura = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataFechamento = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AmbienteId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -341,17 +363,17 @@ namespace MgpTechTickets.Migrations
                 name: "ChamadoLogs",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    UserId = table.Column<int>(nullable: false),
-                    ChamadoFilhoId = table.Column<int>(nullable: false),
-                    Descricao = table.Column<string>(nullable: false),
-                    Solucao = table.Column<string>(nullable: true),
-                    CategoriaId = table.Column<int>(nullable: false),
-                    Status_ = table.Column<string>(nullable: false),
-                    DataAlterado = table.Column<DateTime>(nullable: false),
-                    Tipo = table.Column<string>(nullable: false),
-                    AmbienteId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: true),
+                    ChamadoFilhoId = table.Column<int>(type: "int", nullable: true),
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Solucao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoriaId = table.Column<int>(type: "int", nullable: true),
+                    Status_ = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DataAlterado = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Tipo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AmbienteId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -386,22 +408,22 @@ namespace MgpTechTickets.Migrations
                 name: "Pendencias",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    UserId = table.Column<int>(nullable: false),
-                    UserFinishId = table.Column<int>(nullable: true),
-                    ChamadoId = table.Column<int>(nullable: false),
-                    Descricao = table.Column<string>(nullable: false),
-                    Solucao = table.Column<string>(nullable: true),
-                    CategoriaId = table.Column<int>(nullable: false),
-                    SubCategoriaId = table.Column<int>(nullable: false),
-                    CanalId = table.Column<int>(nullable: false),
-                    Imagem = table.Column<string>(nullable: true),
-                    Status = table.Column<string>(nullable: false),
-                    DataAbertura = table.Column<DateTime>(nullable: false),
-                    DataFechamento = table.Column<DateTime>(nullable: false),
-                    AmbienteId = table.Column<int>(nullable: false),
-                    PendenciaImagem = table.Column<string>(nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: true),
+                    UserFinishId = table.Column<int>(type: "int", nullable: true),
+                    ChamadoId = table.Column<int>(type: "int", nullable: true),
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Solucao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoriaId = table.Column<int>(type: "int", nullable: true),
+                    SubCategoriaId = table.Column<int>(type: "int", nullable: true),
+                    CanalId = table.Column<int>(type: "int", nullable: true),
+                    Imagem = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DataAbertura = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataFechamento = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AmbienteId = table.Column<int>(type: "int", nullable: true),
+                    PendenciaImagem = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -454,11 +476,11 @@ namespace MgpTechTickets.Migrations
                 name: "PendenciaImages",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    ChamadoFilhoId = table.Column<int>(nullable: false),
-                    PathName = table.Column<string>(nullable: false),
-                    AmbienteId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ChamadoFilhoId = table.Column<int>(type: "int", nullable: true),
+                    PathName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AmbienteId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -608,6 +630,11 @@ namespace MgpTechTickets.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Procedimentos_AmbienteId",
+                table: "Procedimentos",
+                column: "AmbienteId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Roles_AmbienteId",
                 table: "Roles",
                 column: "AmbienteId");
@@ -652,6 +679,9 @@ namespace MgpTechTickets.Migrations
 
             migrationBuilder.DropTable(
                 name: "PendenciaImages");
+
+            migrationBuilder.DropTable(
+                name: "Procedimentos");
 
             migrationBuilder.DropTable(
                 name: "Pendencias");

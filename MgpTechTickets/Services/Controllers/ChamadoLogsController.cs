@@ -21,14 +21,14 @@ namespace MgpTechTickets.Services.Controllers
             _context = context;
         }
 
-        // GET: api/ChamadoLogs
+       
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ChamadoLog>>> GetChamadoLogs()
         {
             return await _context.ChamadoLogs.ToListAsync();
         }
 
-        // GET: api/ChamadoLogs/5
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<ChamadoLog>> GetChamadoLog(int id)
         {
@@ -42,9 +42,7 @@ namespace MgpTechTickets.Services.Controllers
             return chamadoLog;
         }
 
-        // PUT: api/ChamadoLogs/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+     
         [HttpPut("{id}")]
         public async Task<IActionResult> PutChamadoLog(int id, ChamadoLog chamadoLog)
         {
@@ -74,9 +72,6 @@ namespace MgpTechTickets.Services.Controllers
             return NoContent();
         }
 
-        // POST: api/ChamadoLogs
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<ChamadoLog>> PostChamadoLog(ChamadoLog chamadoLog)
         {
@@ -86,25 +81,6 @@ namespace MgpTechTickets.Services.Controllers
             return CreatedAtAction("GetChamadoLog", new { id = chamadoLog.Id }, chamadoLog);
         }
 
-        // DELETE: api/ChamadoLogs/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<ChamadoLog>> DeleteChamadoLog(int id)
-        {
-            var chamadoLog = await _context.ChamadoLogs.FindAsync(id);
-            if (chamadoLog == null)
-            {
-                return NotFound();
-            }
-
-            _context.ChamadoLogs.Remove(chamadoLog);
-            await _context.SaveChangesAsync();
-
-            return chamadoLog;
-        }
-
-        private bool ChamadoLogExists(int id)
-        {
-            return _context.ChamadoLogs.Any(e => e.Id == id);
-        }
+       
     }
 }

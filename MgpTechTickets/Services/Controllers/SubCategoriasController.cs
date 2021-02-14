@@ -21,14 +21,14 @@ namespace MgpTechTickets.Services.Controllers
             _context = context;
         }
 
-        // GET: api/SubCategorias
+        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SubCategorias>>> GetSubCategorias()
         {
             return await _context.SubCategorias.ToListAsync();
         }
 
-        // GET: api/SubCategorias/5
+       
         [HttpGet("{id}")]
         public async Task<ActionResult<SubCategorias>> GetSubCategorias(int id)
         {
@@ -42,9 +42,7 @@ namespace MgpTechTickets.Services.Controllers
             return subCategorias;
         }
 
-        // PUT: api/SubCategorias/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+       
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSubCategorias(int id, SubCategorias subCategorias)
         {
@@ -74,9 +72,7 @@ namespace MgpTechTickets.Services.Controllers
             return NoContent();
         }
 
-        // POST: api/SubCategorias
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+       
         [HttpPost]
         public async Task<ActionResult<SubCategorias>> PostSubCategorias(SubCategorias subCategorias)
         {
@@ -86,25 +82,6 @@ namespace MgpTechTickets.Services.Controllers
             return CreatedAtAction("GetSubCategorias", new { id = subCategorias.Id }, subCategorias);
         }
 
-        // DELETE: api/SubCategorias/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<SubCategorias>> DeleteSubCategorias(int id)
-        {
-            var subCategorias = await _context.SubCategorias.FindAsync(id);
-            if (subCategorias == null)
-            {
-                return NotFound();
-            }
-
-            _context.SubCategorias.Remove(subCategorias);
-            await _context.SaveChangesAsync();
-
-            return subCategorias;
-        }
-
-        private bool SubCategoriasExists(int id)
-        {
-            return _context.SubCategorias.Any(e => e.Id == id);
-        }
+       
     }
 }

@@ -32,8 +32,11 @@ namespace MgpTechTickets
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddDbContext<DataContext>(
+            //       context => context.UseSqlite(Configuration.GetConnectionString("Default")));
+
             services.AddDbContext<DataContext>(
-                    context => context.UseSqlite(Configuration.GetConnectionString("Default")));
+                   context => context.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
 
             services.AddControllers();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -55,7 +58,7 @@ namespace MgpTechTickets
             services.AddScoped<IAmbienteService, AmbienteService>();
             services.AddScoped<IAgendaService, AgendaService>();
             services.AddScoped<ICanaisService, CanaisService>();
-            services.AddScoped<ICategoriaService, CategoriaService>();
+            services.AddScoped<ICategoriaService, CategoriasService>();
 
 
             services.AddSwaggerGen(options =>

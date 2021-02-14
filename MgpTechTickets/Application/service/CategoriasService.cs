@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace MgpTechTickets.Application.service
 {
-    public class CategoriaService : ICategoriaService
+    public class CategoriasService : ICategoriaService
     {
         private readonly ICategoriaRepository _categoriaRepository;
 
-        public CategoriaService(ICategoriaRepository categoriaRepository)
+        public CategoriasService(ICategoriaRepository categoriaRepository)
         {
             _categoriaRepository = categoriaRepository;
         }       

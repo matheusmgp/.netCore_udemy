@@ -3,41 +3,45 @@ using System;
 using MgpTechTickets.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MgpTechTickets.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210213150930_init")]
-    partial class init
+    [Migration("20210214190149_sqlservrIiial")]
+    partial class sqlservrIiial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.0");
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("ProductVersion", "5.0.3")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("MgpTechTickets.Models.Agenda", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AmbienteId")
-                        .HasColumnType("INTEGER");
+                    b.Property<int>("AmbienteId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Observacao")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telefone")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -50,22 +54,23 @@ namespace MgpTechTickets.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Cnpj")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Cpf")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NomeFantasia")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RazaoSocial")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -76,16 +81,17 @@ namespace MgpTechTickets.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AmbienteId")
-                        .HasColumnType("INTEGER");
+                    b.Property<int>("AmbienteId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status_")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -98,16 +104,17 @@ namespace MgpTechTickets.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AmbienteId")
-                        .HasColumnType("INTEGER");
+                    b.Property<int>("AmbienteId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status_")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -120,37 +127,38 @@ namespace MgpTechTickets.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("AmbienteId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DataAbertura")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DataFechamento")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("FilialId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Protocolo")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("SetorId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Status_")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("UserFinishId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int?>("UserId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int?>("UserRedirectId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -173,34 +181,35 @@ namespace MgpTechTickets.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("AmbienteId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int?>("CategoriaId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int?>("ChamadoFilhoId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DataAlterado")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Descricao")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Solucao")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status_")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Tipo")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("UserId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -219,13 +228,14 @@ namespace MgpTechTickets.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("AmbienteId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("CliNome")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -238,22 +248,23 @@ namespace MgpTechTickets.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("AmbienteId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("FilCnpj")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FilNomefant")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FilRazsoc")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FilStatus")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -266,34 +277,35 @@ namespace MgpTechTickets.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CpfRepre")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmailFinan")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("FilialId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("IdentiRepre")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NomeFinan")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NomeRepre")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TeleFinan")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telefone")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -306,28 +318,29 @@ namespace MgpTechTickets.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Bairro")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Cep")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Cidade")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Complemento")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("FilialId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Logradouro")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Numero")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -340,49 +353,50 @@ namespace MgpTechTickets.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("AmbienteId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int?>("CanalId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int?>("CategoriaId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int?>("ChamadoId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DataAbertura")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DataFechamento")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Descricao")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Imagem")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PendenciaImagem")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Solucao")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("SubCategoriaId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int?>("UserFinishId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int?>("UserId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -407,16 +421,17 @@ namespace MgpTechTickets.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("AmbienteId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int?>("ChamadoFilhoId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("PathName")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -427,17 +442,44 @@ namespace MgpTechTickets.Migrations
                     b.ToTable("PendenciaImages");
                 });
 
+            modelBuilder.Entity("MgpTechTickets.Models.Procedimentos", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AmbienteId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescricaoValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status_")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AmbienteId");
+
+                    b.ToTable("Procedimentos");
+                });
+
             modelBuilder.Entity("MgpTechTickets.Models.Roles", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("AmbienteId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -450,25 +492,26 @@ namespace MgpTechTickets.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("AmbienteId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status_")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Tempo")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TempoMedio")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TempoRapido")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -481,19 +524,20 @@ namespace MgpTechTickets.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("AmbienteId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int?>("CategoriaId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status_")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -508,22 +552,23 @@ namespace MgpTechTickets.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("RoleId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Senha")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Token")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -536,21 +581,33 @@ namespace MgpTechTickets.Migrations
                 {
                     b.HasOne("MgpTechTickets.Models.Ambiente", "Ambiente")
                         .WithMany()
-                        .HasForeignKey("AmbienteId");
+                        .HasForeignKey("AmbienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ambiente");
                 });
 
             modelBuilder.Entity("MgpTechTickets.Models.CanaisComunicacao", b =>
                 {
                     b.HasOne("MgpTechTickets.Models.Ambiente", "Ambiente")
                         .WithMany()
-                        .HasForeignKey("AmbienteId");
+                        .HasForeignKey("AmbienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ambiente");
                 });
 
             modelBuilder.Entity("MgpTechTickets.Models.Categoria", b =>
                 {
                     b.HasOne("MgpTechTickets.Models.Ambiente", "Ambiente")
                         .WithMany()
-                        .HasForeignKey("AmbienteId");
+                        .HasForeignKey("AmbienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ambiente");
                 });
 
             modelBuilder.Entity("MgpTechTickets.Models.Chamado", b =>
@@ -578,6 +635,18 @@ namespace MgpTechTickets.Migrations
                     b.HasOne("MgpTechTickets.Models.Users", "UserRedirect")
                         .WithMany()
                         .HasForeignKey("UserRedirectId");
+
+                    b.Navigation("Ambiente");
+
+                    b.Navigation("Filial");
+
+                    b.Navigation("Setor");
+
+                    b.Navigation("User");
+
+                    b.Navigation("UserFinish");
+
+                    b.Navigation("UserRedirect");
                 });
 
             modelBuilder.Entity("MgpTechTickets.Models.ChamadoLog", b =>
@@ -597,6 +666,14 @@ namespace MgpTechTickets.Migrations
                     b.HasOne("MgpTechTickets.Models.Users", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Ambiente");
+
+                    b.Navigation("Categoria");
+
+                    b.Navigation("ChamadoFilho");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MgpTechTickets.Models.Cliente", b =>
@@ -604,6 +681,8 @@ namespace MgpTechTickets.Migrations
                     b.HasOne("MgpTechTickets.Models.Ambiente", "Ambiente")
                         .WithMany()
                         .HasForeignKey("AmbienteId");
+
+                    b.Navigation("Ambiente");
                 });
 
             modelBuilder.Entity("MgpTechTickets.Models.Filial", b =>
@@ -611,6 +690,8 @@ namespace MgpTechTickets.Migrations
                     b.HasOne("MgpTechTickets.Models.Ambiente", "Ambiente")
                         .WithMany()
                         .HasForeignKey("AmbienteId");
+
+                    b.Navigation("Ambiente");
                 });
 
             modelBuilder.Entity("MgpTechTickets.Models.FilialDados", b =>
@@ -618,6 +699,8 @@ namespace MgpTechTickets.Migrations
                     b.HasOne("MgpTechTickets.Models.Filial", "Filial")
                         .WithMany()
                         .HasForeignKey("FilialId");
+
+                    b.Navigation("Filial");
                 });
 
             modelBuilder.Entity("MgpTechTickets.Models.FilialEndereco", b =>
@@ -625,6 +708,8 @@ namespace MgpTechTickets.Migrations
                     b.HasOne("MgpTechTickets.Models.Filial", "Filial")
                         .WithMany()
                         .HasForeignKey("FilialId");
+
+                    b.Navigation("Filial");
                 });
 
             modelBuilder.Entity("MgpTechTickets.Models.Pendencia", b =>
@@ -656,6 +741,20 @@ namespace MgpTechTickets.Migrations
                     b.HasOne("MgpTechTickets.Models.Users", "User")
                         .WithMany("Pendencias")
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Ambiente");
+
+                    b.Navigation("Canal");
+
+                    b.Navigation("Categoria");
+
+                    b.Navigation("Chamado");
+
+                    b.Navigation("SubCategoria");
+
+                    b.Navigation("User");
+
+                    b.Navigation("UserFinish");
                 });
 
             modelBuilder.Entity("MgpTechTickets.Models.PendenciaImage", b =>
@@ -667,6 +766,19 @@ namespace MgpTechTickets.Migrations
                     b.HasOne("MgpTechTickets.Models.Pendencia", "ChamadoFilho")
                         .WithMany()
                         .HasForeignKey("ChamadoFilhoId");
+
+                    b.Navigation("Ambiente");
+
+                    b.Navigation("ChamadoFilho");
+                });
+
+            modelBuilder.Entity("MgpTechTickets.Models.Procedimentos", b =>
+                {
+                    b.HasOne("MgpTechTickets.Models.Ambiente", "Ambiente")
+                        .WithMany()
+                        .HasForeignKey("AmbienteId");
+
+                    b.Navigation("Ambiente");
                 });
 
             modelBuilder.Entity("MgpTechTickets.Models.Roles", b =>
@@ -674,6 +786,8 @@ namespace MgpTechTickets.Migrations
                     b.HasOne("MgpTechTickets.Models.Ambiente", "Ambiente")
                         .WithMany()
                         .HasForeignKey("AmbienteId");
+
+                    b.Navigation("Ambiente");
                 });
 
             modelBuilder.Entity("MgpTechTickets.Models.Setores", b =>
@@ -681,6 +795,8 @@ namespace MgpTechTickets.Migrations
                     b.HasOne("MgpTechTickets.Models.Ambiente", "Ambiente")
                         .WithMany()
                         .HasForeignKey("AmbienteId");
+
+                    b.Navigation("Ambiente");
                 });
 
             modelBuilder.Entity("MgpTechTickets.Models.SubCategorias", b =>
@@ -692,6 +808,10 @@ namespace MgpTechTickets.Migrations
                     b.HasOne("MgpTechTickets.Models.Categoria", "Categoria")
                         .WithMany()
                         .HasForeignKey("CategoriaId");
+
+                    b.Navigation("Ambiente");
+
+                    b.Navigation("Categoria");
                 });
 
             modelBuilder.Entity("MgpTechTickets.Models.Users", b =>
@@ -699,6 +819,20 @@ namespace MgpTechTickets.Migrations
                     b.HasOne("MgpTechTickets.Models.Roles", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId");
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("MgpTechTickets.Models.Chamado", b =>
+                {
+                    b.Navigation("Pendencias");
+                });
+
+            modelBuilder.Entity("MgpTechTickets.Models.Users", b =>
+                {
+                    b.Navigation("Chamados");
+
+                    b.Navigation("Pendencias");
                 });
 #pragma warning restore 612, 618
         }

@@ -21,14 +21,14 @@ namespace MgpTechTickets.Services.Controllers
             _context = context;
         }
 
-        // GET: api/Chamados
+       
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Chamado>>> GetChamados()
         {
             return await _context.Chamados.ToListAsync();
         }
 
-        // GET: api/Chamados/5
+       
         [HttpGet("{id}")]
         public async Task<ActionResult<Chamado>> GetChamado(int id)
         {
@@ -42,9 +42,7 @@ namespace MgpTechTickets.Services.Controllers
             return chamado;
         }
 
-        // PUT: api/Chamados/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        
         [HttpPut("{id}")]
         public async Task<IActionResult> PutChamado(int id, Chamado chamado)
         {
@@ -74,9 +72,7 @@ namespace MgpTechTickets.Services.Controllers
             return NoContent();
         }
 
-        // POST: api/Chamados
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+       
         [HttpPost]
         public async Task<ActionResult<Chamado>> PostChamado(Chamado chamado)
         {
@@ -86,25 +82,6 @@ namespace MgpTechTickets.Services.Controllers
             return CreatedAtAction("GetChamado", new { id = chamado.Id }, chamado);
         }
 
-        // DELETE: api/Chamados/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Chamado>> DeleteChamado(int id)
-        {
-            var chamado = await _context.Chamados.FindAsync(id);
-            if (chamado == null)
-            {
-                return NotFound();
-            }
-
-            _context.Chamados.Remove(chamado);
-            await _context.SaveChangesAsync();
-
-            return chamado;
-        }
-
-        private bool ChamadoExists(int id)
-        {
-            return _context.Chamados.Any(e => e.Id == id);
-        }
+       
     }
 }

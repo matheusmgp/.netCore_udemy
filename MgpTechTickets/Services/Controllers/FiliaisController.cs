@@ -21,14 +21,14 @@ namespace MgpTechTickets.Services.Controllers
             _context = context;
         }
 
-        // GET: api/Filiais
+        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Filial>>> GetFiliais()
         {
             return await _context.Filiais.ToListAsync();
         }
 
-        // GET: api/Filiais/5
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<Filial>> GetFilial(int id)
         {
@@ -42,9 +42,7 @@ namespace MgpTechTickets.Services.Controllers
             return filial;
         }
 
-        // PUT: api/Filiais/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        
         [HttpPut("{id}")]
         public async Task<IActionResult> PutFilial(int id, Filial filial)
         {
@@ -74,9 +72,7 @@ namespace MgpTechTickets.Services.Controllers
             return NoContent();
         }
 
-        // POST: api/Filiais
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+       
         [HttpPost]
         public async Task<ActionResult<Filial>> PostFilial(Filial filial)
         {
@@ -85,26 +81,6 @@ namespace MgpTechTickets.Services.Controllers
 
             return CreatedAtAction("GetFilial", new { id = filial.Id }, filial);
         }
-
-        // DELETE: api/Filiais/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Filial>> DeleteFilial(int id)
-        {
-            var filial = await _context.Filiais.FindAsync(id);
-            if (filial == null)
-            {
-                return NotFound();
-            }
-
-            _context.Filiais.Remove(filial);
-            await _context.SaveChangesAsync();
-
-            return filial;
-        }
-
-        private bool FilialExists(int id)
-        {
-            return _context.Filiais.Any(e => e.Id == id);
-        }
+      
     }
 }

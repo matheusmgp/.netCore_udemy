@@ -21,14 +21,14 @@ namespace MgpTechTickets.Services.Controllers
             _context = context;
         }
 
-        // GET: api/Clientes
+       
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
         {
             return await _context.Clientes.ToListAsync();
         }
 
-        // GET: api/Clientes/5
+    
         [HttpGet("{id}")]
         public async Task<ActionResult<Cliente>> GetCliente(int id)
         {
@@ -42,9 +42,6 @@ namespace MgpTechTickets.Services.Controllers
             return cliente;
         }
 
-        // PUT: api/Clientes/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCliente(int id, Cliente cliente)
         {
@@ -74,9 +71,7 @@ namespace MgpTechTickets.Services.Controllers
             return NoContent();
         }
 
-        // POST: api/Clientes
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+       
         [HttpPost]
         public async Task<ActionResult<Cliente>> PostCliente(Cliente cliente)
         {
@@ -86,25 +81,7 @@ namespace MgpTechTickets.Services.Controllers
             return CreatedAtAction("GetCliente", new { id = cliente.Id }, cliente);
         }
 
-        // DELETE: api/Clientes/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Cliente>> DeleteCliente(int id)
-        {
-            var cliente = await _context.Clientes.FindAsync(id);
-            if (cliente == null)
-            {
-                return NotFound();
-            }
-
-            _context.Clientes.Remove(cliente);
-            await _context.SaveChangesAsync();
-
-            return cliente;
-        }
-
-        private bool ClienteExists(int id)
-        {
-            return _context.Clientes.Any(e => e.Id == id);
-        }
+       
+      
     }
 }

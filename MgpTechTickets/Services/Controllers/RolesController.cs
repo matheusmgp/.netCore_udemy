@@ -21,14 +21,14 @@ namespace MgpTechTickets.Services.Controllers
             _context = context;
         }
 
-        // GET: api/Roles
+       
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Roles>>> GetRoles()
         {
             return await _context.Roles.ToListAsync();
         }
 
-        // GET: api/Roles/5
+       
         [HttpGet("{id}")]
         public async Task<ActionResult<Roles>> GetRoles(int id)
         {
@@ -42,9 +42,7 @@ namespace MgpTechTickets.Services.Controllers
             return roles;
         }
 
-        // PUT: api/Roles/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+      
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRoles(int id, Roles roles)
         {
@@ -74,9 +72,7 @@ namespace MgpTechTickets.Services.Controllers
             return NoContent();
         }
 
-        // POST: api/Roles
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+       
         [HttpPost]
         public async Task<ActionResult<Roles>> PostRoles(Roles roles)
         {
@@ -86,25 +82,6 @@ namespace MgpTechTickets.Services.Controllers
             return CreatedAtAction("GetRoles", new { id = roles.Id }, roles);
         }
 
-        // DELETE: api/Roles/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Roles>> DeleteRoles(int id)
-        {
-            var roles = await _context.Roles.FindAsync(id);
-            if (roles == null)
-            {
-                return NotFound();
-            }
-
-            _context.Roles.Remove(roles);
-            await _context.SaveChangesAsync();
-
-            return roles;
-        }
-
-        private bool RolesExists(int id)
-        {
-            return _context.Roles.Any(e => e.Id == id);
-        }
+       
     }
 }
